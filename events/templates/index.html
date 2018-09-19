@@ -1,10 +1,9 @@
 {%load staticfiles%}
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 {% include "header.html" %}
 <body>
-
+{% include "navbar.html" %}
 <!-- Incluir navbar aqui -->
 <main role="main">
     <div class="jumbotron rounded-0 text-center div-background">
@@ -20,7 +19,7 @@
             </div>
             <div class="col-4 col-md-2">
                 <a href="">
-                    <img src="{% static 'hoje.png' %}" class="img=fluid">
+                    <img src="{% static 'hoje.png' %}" class="img-fluid">
                 </a><br/>
                 <h6 class="py-2"> Eventos de Hoje </h6>
             </div>
