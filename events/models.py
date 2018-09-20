@@ -18,7 +18,7 @@ class Event(models.Model):
         ordering = ('date', 'priority', 'event')
 
 
-    def number_off_comments(self):
+    def number_of_comments(self):
         return self.comment_event.count()
 
     def __str__(self):
