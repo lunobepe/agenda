@@ -46,4 +46,4 @@ class Comment(models.Model):
         return g.get_image(default='identicon')
 
     def __str__(self):
-        return "{} commentou em {:%c}".format(self.author, self.commented)
+        return "{} comentou em {:%c}".format(self.author, self.commented)
