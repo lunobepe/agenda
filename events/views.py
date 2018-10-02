@@ -5,7 +5,6 @@ from django.utils.timezone import localdate
 from django.views.defaults import bad_request, server_error
 from .models import Event, Comment
 from .forms import EventForm, CommentForm
-
 from datetime import datetime, timedelta
 
 ITEMS_PER_PAGE = 5
@@ -22,8 +21,8 @@ def index(request):
     """Exibe a página principal da aplicaão."""
     context = {
         'hide_new_button': True,
-            'priorities': Event.priorities_list,
-            'today': localdate(),
+        'priorities': Event.priorities_list,
+        'today': localdate(),
     }
     return render(request, 'index.html', context)
 
@@ -43,9 +42,9 @@ def all(request):
 
     context = {
         'events': events,
-            'total': total,
-            'priorities': Event.priorities_list,
-            'today': localdate(),
+        'total': total,
+        'priorities': Event.priorities_list,
+        'today': localdate(),
     }
     return render(request, 'events.html', context)
 
@@ -56,12 +55,12 @@ def day(request, year: int, month: int, day: int):
     day = datetime(year, month, day)
     context = {
         'today': localdate(),
-            'day': day,
-            'events': Event.objects.filter(
-                date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
-            'next': day + timedelta(days=1),
-            'previous': day - timedelta(days=1),
-            'priorities': Event.priorities_list,
+        'day': day,
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+        'next': day + timedelta(days=1),
+        'previous': day - timedelta(days=1),
+        'priorities': Event.priorities_list,
     }
     return render(request, 'day.html', context)
 
@@ -75,7 +74,7 @@ def delete(request, id: int):
     if event.delete():
         return redirect('agenda-events-day', year=year, month=month, day=day)
     else:
-        return server_errror(reqest, 'ops_500.html')
+        return server_error(request, 'ops_500.html')
 
 
 def edit(request):
@@ -122,9 +121,9 @@ def show(request, id: int):
 
     context = {
         'event': event,
-            'comments': Comment.objects.filter(event=id).order_by('-commented'),
-            'hide_new_button': True,
-            'priorities': Event.priorities_list,
-            'today': localdate(),
+        'comments': Comment.objects.filter(event=id).order_by('-commented'),
+        'hide_new_button': True,
+        'priorities': Event.priorities_list,
+        'today': localdate(),
     }
     return render(request, 'show.html', context)

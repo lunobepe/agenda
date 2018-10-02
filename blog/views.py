@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
+from events.models import Event
+from datetime import datetime
+from django.utils.timezone import localdate
+
 
 
 def post_list(request):
@@ -24,8 +28,20 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    day = datetime(localdate().year, localdate().month, localdate().day)
+    context = {
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+        'form': form
+    }
+    return render(request, 'blog/post_edit.html', context)
 
+def day():
+    day = datetime(localdate().year, localdate().month, localdate().day)
+    context = {
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+    }
 
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -39,5 +55,13 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    day = datetime(localdate().year, localdate().month, localdate().day)
+    context = {
+        'events': Event.objects.filter(
+            date='{:%Y-%m-%d}'.format(day)).order_by('-priority', 'event'),
+        'form': form
+    }
+    return render(request, 'blog/post_edit.html', context)
+
+
 
