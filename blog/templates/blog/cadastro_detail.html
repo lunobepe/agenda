@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+        {{ cadastro.nome }}
+        {{ cadastro.idade }}
+        {{ cadastro.email }}
+        {{ cadastro.telefone }}
+        {{ cadastro.aniversario }}
+        {{ cadastro.sexo}}
+        {{ cadastro.estado_civil}}
+
+         <a class="btn btn-default" href="{% url 'cad_detail' %}"><span class="glyphicon glyphicon-pencil"></span></a>
+{% endblock %}

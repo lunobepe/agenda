@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+     <a class="btn btn-default" href="{% url 'post_cad' %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    {% for cad in cadastro %}
+        <h1>{{ cad.nome }}</h1>
+        <p>{{ cad.idade }}</p>
+        <p>{{ cad.email }}</p>
+        <p>{{ cad.telefone }}</p>
+        <p>{{ cad.aniversario }}</p>
+        <p>{{ cad.sexo }}</p>
+        <p>{{ cad.estado_civil}}</p>
+
+    {% endfor %}
+{% endblock %}
